@@ -46,3 +46,30 @@ WHERE Name LIKE '%m%'
 > | Moon  |  Dog   |
 > |  Tom  |  Cat   |
 ---
+```sql
+CREATE TABLE IF NOT EXISTS `Animals` (
+  `id` int(6) unsigned NOT NULL,
+  `Name` varchar(200) NOT NULL,
+  `Animal` varchar(200) NOT NULL,
+  `Price` int(6) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8;
+INSERT INTO `Animals` (`id`, `Name`, `Animal`, `Price`) VALUES
+  ('1', 'Dr. Harris Bonkers', 'Rabbit', 5),
+  ('2', 'Moon', 'Dog', 6),
+  ('3', 'Ripley', 'Cat', 3),
+  ('4', 'Tom', 'Cat', 12),
+  ('5', 'Boris', 'Cat', 3);
+
+SELECT Animal, SUM(price) AS test
+FROM `Animals`
+GROUP BY Animal, Price
+```
+| Aminal | test  |
+| :----: | :---: |
+|  Cat   |   6   |
+|  Cat   |  12   |
+|  Dog   |   6   |
+| Rabbit |   5   |
+
+---
