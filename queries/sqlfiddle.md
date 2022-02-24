@@ -73,3 +73,31 @@ GROUP BY Animal, Price
 | Rabbit |   5   |
 
 ---
+```sql
+CREATE TABLE IF NOT EXISTS `Animals` (
+  `id` int(6) unsigned NOT NULL,
+  `Name` varchar(200) NOT NULL,
+  `Animal` varchar(200) NOT NULL,
+  `Birth` date NOT NULL,
+  PRIMARY KEY (`id`)
+) DEFAULT CHARSET=utf8;
+INSERT INTO `Animals` (`id`, `Name`, `Animal`, `Birth`) VALUES
+  ('1', 'Dr. Harris Bonkers', 'Rabbit', '2019-12-22'),
+  ('2', 'Moon', 'Dog', '2020-02-21'),
+  ('3', 'Ripley', 'Cat', '2022-01-20'),
+  ('4', 'Tom', 'Cat', '2020-02-19'),
+  ('5', 'Boris', 'Cat', '2022-02-18'),
+  ('6', 'Poytr', 'Rabbit', '2022-01-13');
+
+SELECT EXTRACT(MONTH FROM Birth) as month, COUNT(1) AS num_pets
+FROM `Animals`
+WHERE EXTRACT(YEAR FROM Birth) = 2022
+GROUP BY month
+ORDER BY num_pets
+```
+| month | num_pets |
+| :---: | :------: |
+|   2   |    1     |
+|   1   |    2     |
+
+---
