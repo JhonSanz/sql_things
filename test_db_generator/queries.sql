@@ -98,7 +98,7 @@ WHERE City.city_name = 'Pereira';
 */
 
 
-/* Get all products sold in Peru
+/* Get all products sold in Argentina
 
 | "product_name" | "description"                | "city_name"    |
 | -------------- | ---------------------------- | -------------- |
@@ -116,6 +116,11 @@ inner join public.store_city StoreCity on Product.store_id = StoreCity.store_id
 inner join public.cities City on City.city_id = StoreCity.city_id
 inner join public.countries Country on Country.country_id = City.country_id
 where Country.country_name = 'Argentina'
+
+*/
+
+
+/* Count all different products sold in "Valparaiso" and "Durango"
 
 */
 
