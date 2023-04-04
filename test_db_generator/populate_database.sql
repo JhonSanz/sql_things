@@ -235,8 +235,24 @@ INSERT INTO public.products(product_name, description, store_id) VALUES (
 	(SELECT store_id FROM public.stores WHERE store_name = 'Chorilago')
 );
 
-
-
+INSERT INTO public.sales(price, store_city_id, product_id) VALUES (
+	5, 1, (SELECT product_id FROM public.products WHERE product_name = 'Grinder')
+);
+INSERT INTO public.sales(price, store_city_id, product_id) VALUES (
+	18, 4, (SELECT product_id FROM public.products WHERE product_name = 'Gusanos espaciales')
+);
+INSERT INTO public.sales(price, store_city_id, product_id) VALUES (
+	20, 6, (SELECT product_id FROM public.products WHERE product_name = 'Aguardiente Amarillo')
+);
+INSERT INTO public.sales(price, store_city_id, product_id) VALUES (
+	23, 8, (SELECT product_id FROM public.products WHERE product_name = 'Aguardiente Amarillo')
+);
+INSERT INTO public.sales(price, store_city_id, product_id) VALUES (
+	23, 8, (SELECT product_id FROM public.products WHERE product_name = 'Aguardiente Amarillo')
+);
+INSERT INTO public.sales(price, store_city_id, product_id) VALUES (
+	13, 13, (SELECT product_id FROM public.products WHERE product_name = 'Chapinero')
+);
 
 
 

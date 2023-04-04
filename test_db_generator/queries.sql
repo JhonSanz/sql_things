@@ -120,9 +120,25 @@ where Country.country_name = 'Argentina'
 */
 
 
-/* Count all different products sold in "Valparaiso" and "Durango"
+/* Count all cities in each country
+
+| "country_name" | "ciudades" |
+| -------------- | ---------- |
+| "Venezuela"    | 2          |
+| "Colombia"     | 3          |
+| "Argentina"    | 2          |
+| "Chile"        | 2          |
+| "Peru"         | 2          |
+| "Mexico"       | 2          |
+
+select Country.country_name, count(1) as Ciudades
+from public.cities City
+inner join public.countries Country on City.country_id = Country.country_id
+group by Country.country_name
 
 */
+
+
 
 
 

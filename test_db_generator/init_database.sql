@@ -27,12 +27,24 @@ CREATE TABLE products (
 );
 
 CREATE TABLE store_city (
+	store_city_id serial PRIMARY KEY,
 	store_id INT NOT NULL,
 	city_id INT NOT NULL,
 	FOREIGN KEY (store_id)
 		REFERENCES stores (store_id),
 	FOREIGN KEY (city_id)
 		REFERENCES cities (city_id)
+);
+
+CREATE TABLE sales (
+	sale_id serial PRIMARY KEY,
+	price FLOAT NOT NULL,
+	store_city_id INT NOT NULL,
+	product_id INT NOT NULL,
+	FOREIGN KEY (store_city_id)
+		REFERENCES store_city (store_city_id),
+	FOREIGN KEY (product_id)
+		REFERENCES products (product_id)
 );
 
 
