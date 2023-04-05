@@ -120,6 +120,35 @@ where Country.country_name = 'Argentina'
 */
 
 
+/* Get all unsold products
+
+| "product_id" | "product_name"           | "description"                |
+| ------------ | ------------------------ | ---------------------------- |
+| 11           | "Cajica"                 | "Honey Ale"                  |
+| 12           | "Macondo"                | "Stout"                      |
+| 10           | "Monserrate"             | "Biter"                      |
+| 2            | "Brownies"               | "500g"                       |
+| 15           | "Pizza"                  | "Rica"                       |
+| 13           | "Chorizo"                | "De procedencia desconocida" |
+| 5            | "Cerveza"                | "Poker, Costeña, Aguila"     |
+| 6            | "Aguardiente Antioqueño" |                              |
+| 4            | "Pipas"                  | "Monoplonicas"               |
+| 14           | "Chuzo"                  | "De animal desconocido"      |
+| 7            | "Ron viejo de Caldas"    | "Mejor que el Medellin"      |
+
+select Product.product_id, Product.product_name, Product.description
+from public.sales Sale
+right join public.products Product on Sale.product_id = Product.product_id
+where Sale.sale_id is null;
+
+select Product.product_id, Product.product_name, Product.description
+from public.products Product
+left join public.sales Sale on Sale.product_id = Product.product_id
+where Sale.sale_id is null
+
+*/
+
+
 /* Count all cities in each country
 
 | "country_name" | "ciudades" |
@@ -139,16 +168,42 @@ group by Country.country_name
 */
 
 
+/* Count all "Aguardiente Amarillo" sold
 
+Intenté esta consulta pero hubo algo importante, con la sentencia group by el programa
+evalúa la condición del product_name = 'Aguardiente Amarillo', esto provoca que se creen
+dos categorías, la primera donde se agrupan todos los registros que corresponden a la condición
+del nombre del producto, y la segunda categoría donde quedan los demás productos con otro nombre.
 
+Por lo tanto, a pesar de que si quedan bien contados los productos 'Aguardiente Amarillo', no es tan
+preciso hacerlo de esta manera ya que el resultado obtenido contiene dos filas:
 
+| "Aguardiente Amarillo vendido" |
+| ------------------------------ |
+| 5                              | <- productos con otro nombre
+| 3                              | <- Aguardiente amarillo
 
+select count(1) as "Aguardiente Amarillo vendido"
+from public.sales Sale
+left join public.products Product on Product.product_id = Sale.product_id
+group by Product.product_name = 'Aguardiente Amarillo';
 
+Para realizar esta tarea podemos hacer varias cosas, la mas rápida es cambiar el group by
+por un where:
 
+| "Aguardiente Amarillo vendido" |
+| ------------------------------ |
+| 3                              |
 
+select count(1) as "Aguardiente Amarillo vendido"
+from public.sales Sale
+left join public.products Product on Product.product_id = Sale.product_id
+where Product.product_name = 'Aguardiente Amarillo';
 
+Solución alternativa:
 
+SELECT SUM(CASE WHEN Product.product_name = 'Aguardiente Amarillo' THEN 1 ELSE 0 END) AS "Aguardiente Amarillo vendido"
+FROM public.sales Sale
+LEFT JOIN public.products Product ON Product.product_id = Sale.product_id;
 
-
-
-
+*/

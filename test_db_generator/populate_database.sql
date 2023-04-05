@@ -253,6 +253,9 @@ INSERT INTO public.sales(price, store_city_id, product_id) VALUES (
 INSERT INTO public.sales(price, store_city_id, product_id) VALUES (
 	13, 13, (SELECT product_id FROM public.products WHERE product_name = 'Chapinero')
 );
-
-
-
+INSERT INTO public.sales(price, store_city_id, product_id) VALUES (
+	13, 14, (SELECT product_id FROM public.products WHERE product_name = 'Monserrate')
+);
+INSERT INTO public.sales(price, store_city_id, product_id) VALUES (
+	13, 16, (SELECT product_id FROM public.products WHERE product_name = 'Macondo')
+);
