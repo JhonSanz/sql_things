@@ -125,8 +125,6 @@ where Country.country_name = 'Argentina'
 | "product_id" | "product_name"           | "description"                |
 | ------------ | ------------------------ | ---------------------------- |
 | 11           | "Cajica"                 | "Honey Ale"                  |
-| 12           | "Macondo"                | "Stout"                      |
-| 10           | "Monserrate"             | "Biter"                      |
 | 2            | "Brownies"               | "500g"                       |
 | 15           | "Pizza"                  | "Rica"                       |
 | 13           | "Chorizo"                | "De procedencia desconocida" |
@@ -137,7 +135,10 @@ where Country.country_name = 'Argentina'
 | 7            | "Ron viejo de Caldas"    | "Mejor que el Medellin"      |
 
 Aqui ambas implementaciones son equivalentes, ya que el orden importa. Dependiendo
-de cual sea la primera tabla consultada debemos filtrar el id que queda null:
+de cual sea la primera tabla consultada debemos filtrar el id que queda null.
+
+Esto funciona ya que, al haber productos sin vender, quedarán registros de una de las dos tablas
+en donde no tienen forma de ser relacionados con la otra y por eso quedan null.
 
 select Product.product_id, Product.product_name, Product.description
 from public.sales Sale
