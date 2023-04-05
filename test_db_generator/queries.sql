@@ -136,6 +136,9 @@ where Country.country_name = 'Argentina'
 | 14           | "Chuzo"                  | "De animal desconocido"      |
 | 7            | "Ron viejo de Caldas"    | "Mejor que el Medellin"      |
 
+Aqui ambas implementaciones son equivalentes, ya que el orden importa. Dependiendo
+de cual sea la primera tabla consultada debemos filtrar el id que queda null:
+
 select Product.product_id, Product.product_name, Product.description
 from public.sales Sale
 right join public.products Product on Sale.product_id = Product.product_id
@@ -205,5 +208,25 @@ Solución alternativa:
 SELECT SUM(CASE WHEN Product.product_name = 'Aguardiente Amarillo' THEN 1 ELSE 0 END) AS "Aguardiente Amarillo vendido"
 FROM public.sales Sale
 LEFT JOIN public.products Product ON Product.product_id = Sale.product_id;
+
+*/
+
+
+/* Count all products sold each country
+
+| "country_name" | "count" |
+| -------------- | ------- |
+| "Colombia"     | 3       |
+| "Argentina"    | 1       |
+| "Chile"        | 1       |
+| "Mexico"       | 3       |
+
+select Country.country_name, count(1)
+from public.sales Sale
+left join public.products Product on Product.product_id = Sale.product_id
+inner join public.store_city StoreCity on StoreCity.store_city_id = Sale.store_city_id
+inner join public.cities City on City.city_id = StoreCity.city_id
+inner join public.countries Country on Country.country_id = City.country_id
+group by Country.country_name;
 
 */
